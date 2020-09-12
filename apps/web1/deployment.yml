@@ -15,17 +15,12 @@ spec:
         app: webapp1
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.19.2-alpine
+      - name: web1
+        image: docker.pkg.github.com/warapong-pj/kubernetes/web1:dev
         ports:
         - containerPort: 80
-        volumeMounts:
-        - name: index-volume
-          mountPath: /usr/share/nginx/html/
-      volumes:
-      - name: index-volume
-        configMap:
-          name: webapp1
+      imagePullSecrets:
+      - name: github-com
 ---
 apiVersion: v1
 kind: Service
@@ -38,11 +33,3 @@ spec:
   - protocol: TCP
     port: 80
   type: ClusterIP
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: webapp1
-data:
-  index.html: |
-    <h1>Web Application 1</h1>

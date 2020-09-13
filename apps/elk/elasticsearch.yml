@@ -1,8 +1,13 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: kube-log
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-cluster
-  namespace: kube-logging
+  namespace: kube-log
 spec:
   serviceName: elasticsearch
   replicas: 1
@@ -41,7 +46,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: elasticsearch
-  namespace: kube-logging
+  namespace: kube-log
   labels:
     app: elasticsearch
 spec:

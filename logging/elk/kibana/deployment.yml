@@ -26,20 +26,5 @@ spec:
         env:
           - name: ELASTICSEARCH_HOSTS
             value: http://elasticsearch.kube-log.svc.cluster.local:9200
-          - name: SERVER_BASEPATH
-            value: /kibana
         ports:
         - containerPort: 5601
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: kibana
-  namespace: kube-log
-  labels:
-    app: kibana
-spec:
-  ports:
-  - port: 5601
-  selector:
-    app: kibana

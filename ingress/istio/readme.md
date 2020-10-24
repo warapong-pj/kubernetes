@@ -1,2 +1,4 @@
-command to generate istio yaml file
-istioctl manifest generate --set values.global.jwtPolicy=first-party-jwt > ingress/istio/istio.yml 
+revise from manual install to install by istio operator
+step to install
+1. run command "istio operator init" or "kubectl apply -f istio-operator.yml"
+2. run command "kubectl apply -f istio.yml"

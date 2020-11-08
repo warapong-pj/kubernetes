@@ -1,13 +1,27 @@
+# apiVersion: install.istio.io/v1alpha1
+# kind: IstioOperator
+# metadata:
+#   namespace: istio-system
+#   name: istio-controlplane
+# spec:
+#   profile: default
+
+
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 metadata:
   namespace: istio-system
-  name: istiocontrolplane
+  name: istio-controlplane
 spec:
-  profile: default
   addonComponents:
+    grafana:
+      enabled: false
+    prometheus:
+      enabled: false
     prometheusOperator:
       enabled: true
+    kiali:
+      enabled: false
   values:
     prometheusOperator:
       createPrometheusResource: false

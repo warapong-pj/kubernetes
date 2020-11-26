@@ -18,10 +18,7 @@ spec:
         app: grafana
     spec:
       containers:
-      # - env: []
-      - env:
-        - name: GF_INSTALL_PLUGINS
-          value: grafana-kubernetes-app
+      - env: []
         image: grafana/grafana:7.1.0
         name: grafana
         ports:
@@ -117,6 +114,9 @@ spec:
         - mountPath: /grafana-dashboard-definitions/0/workload-total
           name: grafana-dashboard-workload-total
           readOnly: false
+        - mountPath: /etc/grafana
+          name: grafana-config
+          readOnly: false
       nodeSelector:
         beta.kubernetes.io/os: linux
       securityContext:
@@ -202,3 +202,6 @@ spec:
       - configMap:
           name: grafana-dashboard-workload-total
         name: grafana-dashboard-workload-total
+      - configMap:
+          name: grafana-config
+        name: grafana-config

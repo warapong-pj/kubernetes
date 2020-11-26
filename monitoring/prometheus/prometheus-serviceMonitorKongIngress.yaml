@@ -1,15 +1,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  labels:
-    k8s-app: prometheus
-  name: prometheus
+  name: kong-ingress
   namespace: monitoring
 spec:
-  endpoints:
-  - interval: 30s
-    port: web
+  namespaceSelector:
+    matchNames:
+    - kong
   selector:
     matchLabels:
-      prometheus: k8s
-
+      app: ingress-kong
+  endpoints:
+  - port: admin

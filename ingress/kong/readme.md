@@ -7,4 +7,4 @@
 2. delete ValidatingWebhookConfiguration that get from first command `kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission`
 
 ### how to add private and public key to kubernetes cluster
-kubectl create secret tls acm-wemall-dev --key ingress/kong/pri.pem --cert ingress/kong/pub.pem
+kubectl create secret tls domain --key /path/to/private.pem --cert /path/to/public.pem

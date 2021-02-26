@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres
+data:
+  postgres_url: jdbc:postgresql.default.svc.cluster.local://sonarqube/sonarqube?currentSchema=sonarqube
+  postgres_database: sonarqube
+  postgres_username: admin

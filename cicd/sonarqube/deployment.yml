@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarqube
+spec:
+  selector:
+    matchLabels:
+      app: sonarqube
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sonarqube
+    spec:
+      containers:
+        - name: sonarqube
+          image: sonarqube:7.9.5-community
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+          env:
+          - name: SONAR_JDBC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: postgres
+                key: postgres_url
+          - name: SONAR_JDBC_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: postgres
+                key: postgres_username
+          - name: SONAR_JDBC_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres
+                key: postgres_password

@@ -1,47 +1,47 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ghost
+  name: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
   labels:
-    app: ghost
+    app: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ghost
+      app: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
   template:
     metadata:
       labels:
-        app: ghost
+        app: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
     spec:
       containers:
-      - name: ghost
-        image: ghost:3.40.2-alpine
+      - name: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
+        image: {{ .Values.cms.application.container.image }}
         env:
         - name: database__connection__user
           valueFrom:
             secretKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-secret
               key: username
         - name: database__connection__password
           valueFrom:
             secretKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-secret
               key: password
         - name: database__connection__database
           valueFrom:
             configMapKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-config
               key: database
         - name: database__connection__host
           valueFrom:
             configMapKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-config
               key: hostname
         - name: database__client
           valueFrom:
             configMapKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-config
               key: type
         ports:
         - containerPort: 2368

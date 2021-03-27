@@ -1,41 +1,41 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql
+  name: {{ .Values.cms.project }}-{{ .Values.cms.database.service }}
 spec:
   selector:
     matchLabels:
-      app: mysql
-  serviceName: "mysql"
+      app: {{ .Values.cms.project }}-{{ .Values.cms.database.service }}
+  serviceName: {{ .Values.cms.project }}-{{ .Values.cms.database.service }}
   replicas: 1
   template:
     metadata:
       labels:
-        app: mysql
+        app: {{ .Values.cms.project }}-{{ .Values.cms.database.service }}
     spec:
       containers:
-      - name: mysql
-        image: mysql:5.7.33
+      - name: {{ .Values.cms.project }}-{{ .Values.cms.database.service }}
+        image: {{ .Values.cms.database.container.image }}
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-secret
               key: root
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-secret
               key: username
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-secret
               key: password
         - name: MYSQL_DATABASE
           valueFrom:
             configMapKeyRef:
-              name: mysql
+              name: {{ .Values.cms.project }}-config
               key: database
         ports:
         - containerPort: 3306

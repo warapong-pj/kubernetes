@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.cms.project }}-{{ .Values.cms.database.service }}
+spec:
+  selector:
+    app: {{ .Values.cms.project }}-{{ .Values.cms.database.service }}
+  ports:
+  - name: mysql
+    protocol: TCP
+    port: {{ .Values.cms.database.container.port }}
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
+spec:
+  selector:
+    app: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
+  ports:
+  - name: http
+    protocol: TCP
+    port: {{ .Values.cms.application.container.port }}
+  type: ClusterIP

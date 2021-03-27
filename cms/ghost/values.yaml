@@ -1,0 +1,18 @@
+cms:
+  project: sample
+  application:
+    service: app
+    replicaCount: 1
+    container:
+      image: ghost:3.42.4-alpine
+      port: 2368
+  database:
+    service: db
+    replicaCount: 1
+    container:
+      image: mysql:5.7.33
+      database: ghost
+      root: cm9vdA==
+      username: Z2hvc3Q=
+      password: Z2hvc3Q=
+      port: 3306

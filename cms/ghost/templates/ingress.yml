@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ghost
+  name: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
   annotations:
     kubernetes.io/ingress.class: "kong"
 spec:
@@ -11,5 +11,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: ghost
+          serviceName: {{ .Values.cms.project }}-{{ .Values.cms.application.service }}
           servicePort: 2368

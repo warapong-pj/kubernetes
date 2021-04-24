@@ -2,6 +2,7 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: logging
+  namespace: logging
   labels:
     app: logging
 spec:
@@ -9,7 +10,7 @@ spec:
   count: 1
   elasticsearchRef:
     name: logging
-    namespace: default
+    namespace: logging
   http:
     tls:
       selfSignedCertificate:

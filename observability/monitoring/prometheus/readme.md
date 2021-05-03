@@ -1,1 +1,3 @@
-kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml
+### How to install kube-prometheus
+1. kubectl create -f manifests/setup
+2. kubectl create -f manifests/
